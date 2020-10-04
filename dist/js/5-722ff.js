@@ -1,0 +1,1 @@
+(window.webpackJsonp=window.webpackJsonp||[]).push([[5],{145:function(e,n,t){"use strict";t.r(n);var i=function(){var e=this.$createElement;return(this._self._c||e)("div",[this._v("这里是商品信息区域")])};i._withStripped=!0;var o={name:"Info"},s=t(9),r=Object(s.a)(o,i,[],!1,null,"2257709e",null);r.options.__file="src/components/menu/Info.vue";n.default=r.exports}}]);

@@ -1,0 +1,13 @@
+html,
+body,
+ul,
+li,
+ol {
+    padding: 0;
+    margin: 0;
+}
+
+body {
+    min-height: 100vh;
+    overflow: hidden;
+}
