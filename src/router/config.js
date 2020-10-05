@@ -5,16 +5,20 @@ export default [
         path: '/',
         component: Login,
     },
+    // {
+    //     path: '/test',
+    //     component: () => import('@/view/Test')
+    // },
     {
         path: '/admin',
         component: () => import('@/view/Admin'),
         children: [
             {
-                path: 'all',
+                path: '',
                 component: () => import('&/menu/All')
             },
             {
-                path: 'in',
+                path: '/admin/in',
                 component: () => import('&/menu/SetIn')
             },
             {
@@ -22,11 +26,11 @@ export default [
                 component: () => import('&/menu/GetOut')
             },
             {
-                path: 'op',
+                path: 'log',
                 component: () => import('&/menu/OpLog')
             },
             {
-                path: 'analysis',
+                path: '/admin/analysis',
                 component: () => import('&/menu/Analysis')
             },
             {

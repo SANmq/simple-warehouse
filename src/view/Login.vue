@@ -41,7 +41,6 @@
         },
         methods: {
             submit() {
-                console.log(this.form)
                 this.$router.push('/admin')
             }
         }

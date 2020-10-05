@@ -22,6 +22,7 @@ const devConf = {
             rewrites: [{from: /./, to: '/index.html'}]
         },
     }
+    // watch: true
 }
 
 module.exports = merge(baseConf, devConf)

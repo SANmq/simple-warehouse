@@ -1,0 +1,21 @@
+.el-button--diy {
+    color: #FFF;
+    background-color: #30a679;
+    border-color: #30f679;
+}
+
+.el-button--diy:focus, .el-button--diy:hover {
+    background: rgba(40, 132, 96, 0.78);
+    border-color: #1f9c4e;
+    color: #FFF;
+}
+
+.el-breadcrumb {
+    line-height: inherit;
+    color: black;
+    margin-left: 20px;
+}
+
+.el-breadcrumb__inner {
+    color: inherit !important;
+}

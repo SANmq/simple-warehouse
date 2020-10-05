@@ -1,5 +1,4 @@
 const path = require('path')
-const {CleanWebpackPlugin} = require('clean-webpack-plugin')
 const VueLoaderPlugin = require('vue-loader/lib/plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const CopyPlugin = require("copy-webpack-plugin")
@@ -7,7 +6,7 @@ const CopyPlugin = require("copy-webpack-plugin")
 module.exports = {
     entry: './src/main.js',
     output: {
-        filename: 'js/[name]-[hash:5].js',
+        filename: 'js/[name].js',
         path: path.resolve(__dirname, 'dist'),
         publicPath: '/'
     },
@@ -26,11 +25,11 @@ module.exports = {
         builtAt: false
     },
     module: {
-        rules: [{
-            test: /\.vue$/,
-            use: 'vue-loader'
-        },
-
+        rules: [
+            {
+                test: /\.vue$/,
+                use: 'vue-loader'
+            },
             {
                 test: /\.(png|jpe?g|gif|svg)(\?.*)?$/,
                 loader: 'url-loader',
@@ -58,10 +57,11 @@ module.exports = {
         ]
     },
     plugins: [
+        new VueLoaderPlugin(),
         new HtmlWebpackPlugin({
             template: "./public/index.html",
             filename: "index.html",
-            hash: true
+            inject: true,
         }),
         new CopyPlugin({
             patterns: [{
@@ -75,7 +75,5 @@ module.exports = {
                 },
             }],
         }),
-        new CleanWebpackPlugin({}),
-        new VueLoaderPlugin(),
     ],
 }
