@@ -19,3 +19,8 @@
 .el-breadcrumb__inner {
     color: inherit !important;
 }
+
+.login .el-form-item {
+    margin-right: 0;
+}
+

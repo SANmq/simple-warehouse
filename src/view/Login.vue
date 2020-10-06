@@ -1,5 +1,5 @@
 <template>
-    <el-card style="width: 300px;margin:100px auto">
+    <el-card class="login" style="width: 283px;margin:100px auto">
         <el-form :model="form"
                  @submit.prevent="submit"
                  style="text-align: center"
@@ -48,6 +48,6 @@
     }
 </script>
 
-<style>
+<style lang="less">
 
 </style>

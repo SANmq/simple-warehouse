@@ -18,24 +18,24 @@ export default [
                 component: () => import('&/menu/All')
             },
             {
-                path: '/admin/in',
+                path: 'in',
                 component: () => import('&/menu/SetIn')
             },
             {
                 path: 'out',
-                component: () => import('&/menu/GetOut')
+                component: () => import('&/menu/TakeOut')
             },
             {
                 path: 'log',
                 component: () => import('&/menu/OpLog')
             },
             {
-                path: '/admin/analysis',
+                path: 'analysis',
                 component: () => import('&/menu/Analysis')
             },
             {
-                path: 'info',
-                component: () => import('&/menu/Info')
+                path: 'classify',
+                component: () => import('&/menu/Classify')
             },
         ]
     },

@@ -18,7 +18,7 @@
         </el-menu-item>
 
 
-        <el-submenu index="">
+        <el-submenu index="manage">
             <template slot="title">
                 <i class="el-icon-s-order"></i>
                 <span slot="title">货品管理</span>
@@ -37,10 +37,18 @@
             </el-menu-item>
         </el-submenu>
 
-        <el-menu-item index="/admin/info">
-            <i class="el-icon-document"></i>
-            <span slot="title">货品信息</span>
-        </el-menu-item>
+        <el-submenu index="info">
+            <template slot="title">
+                <i class="el-icon-document"></i>
+                <span slot="title">货品信息</span>
+            </template>
+            <el-menu-item index="/admin/classify">
+                <i class="el-icon-menu"></i>
+                <span slot="title">分类信息</span>
+            </el-menu-item>
+        </el-submenu>
+
+
         <el-menu-item index="/admin/analysis">
             <i class="el-icon-s-marketing"></i>
             <span slot="title">收益分析</span>

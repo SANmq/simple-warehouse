@@ -50,7 +50,8 @@
                     out: '商品出库',
                     log: '操作日志',
                     info: '货品信息',
-                    analysis: '收益分析'
+                    analysis: '收益分析',
+                    classify: '分类信息'
                 }
             }
         },
@@ -92,26 +93,6 @@
             background-color: #545c64;
             position: fixed;
             transition: width .3s linear;
-
-
-            &::-webkit-scrollbar {
-                width: 5px;
-                background-color: grey;
-                border-right: 1px solid black;
-            }
-
-            /* 这里是滚动槽的设置*/
-
-            &::-webkit-scrollbar-track {
-                background-color: #42b98399;
-            }
-
-            /* 这里是滚动滑块 */
-
-            &::-webkit-scrollbar-thumb {
-                border-radius: 2.5px;
-                background-color: #3699;
-            }
         }
 
         .main {

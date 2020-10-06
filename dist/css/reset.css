@@ -12,3 +12,21 @@ body {
     overflow: hidden;
 }
 
+::-webkit-scrollbar {
+    width: 5px;
+    height: 10px;
+    background-color: grey;
+    border-right: 1px solid black;
+}
+
+/* 这里是滚动槽的设置*/
+::-webkit-scrollbar-track {
+    background-color: #42b98399;
+}
+
+/* 这里是滚动滑块 */
+::-webkit-scrollbar-thumb {
+    border-radius: 3px;
+    background-color: #3699;
+}
+
