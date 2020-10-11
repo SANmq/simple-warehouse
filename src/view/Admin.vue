@@ -6,9 +6,9 @@
         <div class="main">
             <div class='nav'>
                 <el-button type="diy"
-                           style="height: 36px;margin: 6px"
+                           :icon="isCollapse ?'el-icon-s-unfold' : 'el-icon-s-fold'"
+                           style="height: 36px;margin: 6px;font-size: 20px"
                            @click="isCollapse=!isCollapse">
-                    {{isCollapse?'展开':'收起'}}
                 </el-button>
 
                 <el-breadcrumb separator="/">
@@ -19,14 +19,13 @@
                         style="margin-right: 20px"
                         @command="handleCommand">
                   <span class="el-dropdown-link">
-                    {{'admin'}}<i class="el-icon-arrow-down el-icon--right"></i>
+                    {{adminName}}<i class="el-icon-arrow-down el-icon--right"></i>
                   </span>
                     <el-dropdown-menu slot="dropdown">
                         <el-dropdown-item style="width: 40px" command="logout">登出</el-dropdown-item>
                     </el-dropdown-menu>
                 </el-dropdown>
             </div>
-
             <router-view></router-view>
         </div>
     </div>
@@ -34,7 +33,7 @@
 
 <script>
     import SideNav from "&/SideNav";
-
+    import {mapState} from 'vuex'
 
     export default {
         name: "Admin",
@@ -44,15 +43,6 @@
         data() {
             return {
                 isCollapse: false,
-                routeDict: {
-                    admin: '商品总览',
-                    in: '商品入库',
-                    out: '商品出库',
-                    log: '操作日志',
-                    info: '货品信息',
-                    analysis: '收益分析',
-                    classify: '分类信息'
-                }
             }
         },
         methods: {
@@ -60,15 +50,14 @@
                 if (command === 'logout') {
                     console.log('我要登出')
                 }
-
-            }
+            },
         },
         computed: {
+            ...mapState(['routeDict', 'isLogin', 'adminName']),
             breadList() {
                 return this.$route.path.split('/').slice(1)
             }
         },
-        watch: {}
     }
 </script>
 
@@ -107,6 +96,11 @@
                 border-bottom: 1px solid #aaa;
                 line-height: 48px;
                 text-align: center;
+            }
+
+            & > div:last-of-type {
+                overflow-y: auto;
+                height: calc(100vh - 48px);
             }
         }
     }

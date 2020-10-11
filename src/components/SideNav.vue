@@ -10,49 +10,58 @@
             style="border-right: none;"
             :router="true"
             active-text-color="#ffd04b">
-
-
         <el-menu-item index="/admin">
             <i class="el-icon-s-home"></i>
             <span slot="title">货品总览</span>
         </el-menu-item>
-
-
         <el-submenu index="manage">
             <template slot="title">
                 <i class="el-icon-s-order"></i>
                 <span slot="title">货品管理</span>
             </template>
-            <el-menu-item index="/admin/in">
-                <i class="el-icon-s-fold"></i>
-                <span slot="title">入库</span>
+            <el-menu-item index="/manage/add">
+                <i class="el-icon-circle-plus"></i>
+                <span slot="title">添加商品</span>
             </el-menu-item>
-            <el-menu-item index="/admin/out">
-                <i class="el-icon-s-unfold"></i>
-                <span slot="title">出库</span>
+            <el-menu-item index="/manage/inbound">
+                <i class="el-icon-inbound"></i>
+                <span slot="title">商品入库</span>
             </el-menu-item>
-            <el-menu-item index="/admin/log">
+            <el-menu-item index="/manage/outbound">
+                <i class="el-icon-outbound"></i>
+                <span slot="title">商品出库</span>
+            </el-menu-item>
+            <el-menu-item index="/manage/log">
                 <i class="el-icon-date"></i>
-                <span slot="title">日志</span>
+                <span slot="title">操作日志</span>
             </el-menu-item>
         </el-submenu>
 
         <el-submenu index="info">
             <template slot="title">
-                <i class="el-icon-document"></i>
-                <span slot="title">货品信息</span>
+                <i class="el-icon-s-tools"></i>
+                <span slot="title">仓库配置</span>
             </template>
-            <el-menu-item index="/admin/classify">
+            <el-menu-item index="/config/classify">
                 <i class="el-icon-menu"></i>
                 <span slot="title">分类信息</span>
             </el-menu-item>
         </el-submenu>
 
-
-        <el-menu-item index="/admin/analysis">
-            <i class="el-icon-s-marketing"></i>
-            <span slot="title">收益分析</span>
-        </el-menu-item>
+        <el-submenu index="analysis">
+            <template slot="title">
+                <i class="el-icon-data-analysis"></i>
+                <span slot="title">统计分析</span>
+            </template>
+            <el-menu-item index="/analysis/money">
+                <i class="el-icon-rmb"></i>
+                <span slot="title">收益分析</span>
+            </el-menu-item>
+            <el-menu-item index="/analysis/store">
+                <i class="el-icon-commodity"></i>
+                <span slot="title">仓库分析</span>
+            </el-menu-item>
+        </el-submenu>
     </el-menu>
 </template>
 <script>
@@ -75,14 +84,7 @@
                 console.log(key, keyPath);
             },
         },
-        computed: {
-            r() {
-                return /^\/admin\//.test(this.$route.path)
-            }
-        },
-        destroyed() {
-            console.log('每次会渲染新的')
-        }
+        computed: {},
     }
 </script>
 <style>

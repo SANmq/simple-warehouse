@@ -11,6 +11,9 @@
         name: "App",
         components: {
             Test
+        },
+        created() {
+            this._refresh()
         }
     };
 </script>

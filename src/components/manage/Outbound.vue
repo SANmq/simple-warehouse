@@ -1,6 +1,6 @@
 <template>
     <div class="take-out">
-        <h2>待出库商品队列</h2>
+        <h2 class="tip-title">待出库商品队列</h2>
         <div ref="cs"></div>
         <el-table
                 :data="tableData"
@@ -13,7 +13,7 @@
                     <el-input
                             v-model="searchId"
                             size="mini"
-                            placeholder="输入商品编号检索"/>
+                            placeholder="编号检索"/>
                 </template>
                 <template slot-scope="scope">
                     <span>{{ scope.row.ID }}</span>
@@ -33,8 +33,8 @@
                     width="100">
                 <template slot-scope="scope">
                     <el-image style="width: 40px; height: 40px;vertical-align: middle;"
-                              :src="scope.row.ImageUrl"
-                              :preview-src-list="[scope.row.ImageUrl]"
+                              :src="scope.row.imageUrl"
+                              :preview-src-list="[scope.row.imageUrl]"
                               fit="cover">
                     </el-image>
                 </template>
@@ -122,7 +122,7 @@
                     ID: '#1036',
                     nickName: '针孔打印机',
                     address: '上海市普陀区金沙江路 1518 弄',
-                    ImageUrl: 'http://49.235.228.244/img/timg.jpg',
+                    imageUrl: 'http://49.235.228.244/img/timg.jpg',
                     date: '2020-05-09',
                     num: 5,
                     price: 0,
@@ -133,7 +133,7 @@
                     ID: '#1037',
                     nickName: '联想E40',
                     address: '上海市普陀区金沙江路 1517 弄',
-                    ImageUrl: '',
+                    imageUrl: '',
                     date: '',
                     num: 5,
                     price: 0,
@@ -143,7 +143,7 @@
                     ID: '#1038',
                     nickName: '华硕平板',
                     address: '上海市普陀区金沙江路 1519 弄',
-                    ImageUrl: '',
+                    imageUrl: '',
                     date: '',
                     num: 5,
                     price: 0,
@@ -199,7 +199,5 @@
 <style lang="less">
     .take-out {
         text-align: center;
-        overflow-y: auto;
-        height: calc(100vh - 48px);
     }
 </style>

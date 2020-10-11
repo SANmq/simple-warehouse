@@ -8,7 +8,7 @@
             <el-form-item label="账号">
                 <el-input type="text"
                           prefix-icon="el-icon-user"
-                          v-model="form.count">
+                          v-model="form.name">
                 </el-input>
             </el-form-item>
             <el-form-item label="密码">
@@ -34,20 +34,35 @@
         data() {
             return {
                 form: {
-                    count: '',
+                    name: '',
                     password: ''
                 }
             }
         },
         methods: {
             submit() {
-                this.$router.push('/admin')
+                this.$http.post('/api/login', this.form).then(
+                    (resp) => {
+                        if (resp.status === 200) {
+                            // 登录成功后的操作
+                            this.$message({
+                                message: resp.data,
+                                type: 'success',
+                                duration: 1000,
+                            })
+                            this._setSession(this.form.name)
+                            this.$router.push('/admin')
+                        }
+                    }, (err) => {
+                        this.$message({
+                            message: err,
+                            duration: 5000,
+                            type: 'error',
+                            showClose: true
+                        })
+                    }
+                )
             }
         }
-
     }
 </script>
-
-<style lang="less">
-
-</style>

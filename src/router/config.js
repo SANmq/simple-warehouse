@@ -5,37 +5,63 @@ export default [
         path: '/',
         component: Login,
     },
-    // {
-    //     path: '/test',
-    //     component: () => import('@/view/Test')
-    // },
+    {
+        path: '/test',
+        component: () => import('../view/Test')
+    },
+    {
+        path: '/manage',
+        component: () => import('../view/Admin'),
+        children: [
+            {
+                path: 'add',
+                component: () => import('&/manage/AddGood')
+            },
+            {
+                path: 'outbound',
+                component: () => import('&/manage/Outbound')
+            },
+            {
+                path: 'inbound',
+                component: () => import('&/manage/Inbound')
+            },
+            {
+                path: 'log',
+                component: () => import('&/manage/OpLog')
+            }
+        ]
+    },
+    {
+        path: '/analysis',
+        component: () => import('../view/Admin'),
+        children: [
+            {
+                path: 'money',
+                component: () => import('&/analysis/Analysis')
+            },
+            {
+                path: 'store',
+                component: () => import('&/analysis/Store')
+            }
+        ]
+    },
+    {
+        path: '/config',
+        component: () => import('../view/Admin'),
+        children: [
+            {
+                path: 'classify',
+                component: () => import('&/config/Classify')
+            },
+        ]
+    },
     {
         path: '/admin',
-        component: () => import('@/view/Admin'),
+        component: () => import('../view/Admin'),
         children: [
             {
                 path: '',
                 component: () => import('&/menu/All')
-            },
-            {
-                path: 'in',
-                component: () => import('&/menu/SetIn')
-            },
-            {
-                path: 'out',
-                component: () => import('&/menu/TakeOut')
-            },
-            {
-                path: 'log',
-                component: () => import('&/menu/OpLog')
-            },
-            {
-                path: 'analysis',
-                component: () => import('&/menu/Analysis')
-            },
-            {
-                path: 'classify',
-                component: () => import('&/menu/Classify')
             },
         ]
     },
