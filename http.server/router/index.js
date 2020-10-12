@@ -36,7 +36,7 @@ app.use('/api/login', require('./api/login'))
 app.use('/api', verify)
 app.use('/api/upload', require('./api/upload'))
 app.use('/api/classify', require('./api/classifyList'))
-
+app.use('/api/good', require('./api/goodOp'))
 
 app.listen(8888, async () => {
     // 初始化创建一个管理员,账号admin,密码000000,权限1

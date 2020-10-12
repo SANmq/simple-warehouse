@@ -57,8 +57,9 @@ router.post('/', (req, res, next) => {
 
             try {
                 console.log(req.files)
+                console.log('--------------这里是一次请求---------------------')
                 const data = req.files.map((v, i, self) => {
-                    return v.filename
+                    return {name: v.originalname, url: v.filename}
                 })
                 res.send(data)
                 // 一切都好
@@ -73,9 +74,7 @@ router.post('/', (req, res, next) => {
 // 处理图片文件的删除,提供upload目录下的文件名称,进行删除,安全,只能指定文件名称进行删除,
 // 实际删除文件过程还需要其他的内容进行支持,
 router.delete('/', async (req, res, next) => {
-    let list = req.query.imageUrlList
-    console.log(list, typeof list)
-    list = JSON.parse(list)
+    let list = req.query.imageUrl.split(';')
     // 返回删除的文件结果
     let result = []
     // 循环删除文件列表中的文件
