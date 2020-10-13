@@ -18,12 +18,12 @@ export default [
                 component: () => import('&/manage/AddGood')
             },
             {
-                path: 'outbound',
-                component: () => import('&/manage/Outbound')
+                path: 'sale',
+                component: () => import('&/manage/Sale')
             },
             {
-                path: 'inbound',
-                component: () => import('&/manage/Inbound')
+                path: 'cost',
+                component: () => import('&/manage/Cost')
             },
             {
                 path: 'log',

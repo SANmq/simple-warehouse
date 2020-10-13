@@ -1,7 +1,3 @@
-.el-menu-vertical-demo[data-v-baf6575a]:not(.el-menu--collapse) {
-  width: 180px;
-}
-
 @charset "UTF-8";
 .el-pagination--small .arrow.disabled,
 .el-table .hidden-columns,
@@ -13046,6 +13042,32 @@
   margin: 0;
 }
 
+@font-face {
+  font-family: 'iconfont';
+  /* project id 2116339 */
+  src: url('//at.alicdn.com/t/font_2116339_hze5yl2vqy.eot');
+  src: url('//at.alicdn.com/t/font_2116339_hze5yl2vqy.eot?#iefix') format('embedded-opentype'), url('//at.alicdn.com/t/font_2116339_hze5yl2vqy.woff2') format('woff2'), url('//at.alicdn.com/t/font_2116339_hze5yl2vqy.woff') format('woff'), url('//at.alicdn.com/t/font_2116339_hze5yl2vqy.ttf') format('truetype'), url('//at.alicdn.com/t/font_2116339_hze5yl2vqy.svg#iconfont') format('svg');
+}
+.el-icon-cost::before {
+  font-family: iconfont, sans-serif;
+  content: '\e602';
+}
+.el-icon-inbound::before {
+  font-family: iconfont, sans-serif;
+  content: '\e654';
+}
+.el-icon-outbound::before {
+  font-family: iconfont, sans-serif;
+  content: '\e633';
+}
+.el-icon-commodity::before {
+  font-family: iconfont, sans-serif;
+  content: '\e6c3';
+}
+.el-icon-rmb::before {
+  font-family: iconfont, sans-serif;
+  content: '\e601';
+}
 .el-button--diy {
   color: #FFF;
   background-color: #30a679;

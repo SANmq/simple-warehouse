@@ -23,13 +23,13 @@
                 <i class="el-icon-circle-plus"></i>
                 <span slot="title">添加商品</span>
             </el-menu-item>
-            <el-menu-item index="/manage/inbound">
-                <i class="el-icon-inbound"></i>
-                <span slot="title">商品入库</span>
+            <el-menu-item index="/manage/cost">
+                <i class="el-icon-cost"></i>
+                <span slot="title">成本管理</span>
             </el-menu-item>
-            <el-menu-item index="/manage/outbound">
-                <i class="el-icon-outbound"></i>
-                <span slot="title">商品出库</span>
+            <el-menu-item index="/manage/sale">
+                <i class="el-icon-coin"></i>
+                <span slot="title">销售管理</span>
             </el-menu-item>
             <el-menu-item index="/manage/log">
                 <i class="el-icon-date"></i>

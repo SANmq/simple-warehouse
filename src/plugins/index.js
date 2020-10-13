@@ -1,11 +1,91 @@
 import axios from 'axios'
 
+Date.prototype.format = function (fmt) {
+    let o = {
+        "M+": this.getMonth() + 1,                 //月份
+        "d+": this.getDate(),                    //日
+        "h+": this.getHours(),                   //小时
+        "m+": this.getMinutes(),                 //分
+        "s+": this.getSeconds(),                 //秒
+        "q+": Math.floor((this.getMonth() + 3) / 3), //季度
+        "S": this.getMilliseconds()             //毫秒
+    };
+    if (/(y+)/.test(fmt)) {
+        fmt = fmt.replace(RegExp.$1, (this.getFullYear() + "").substr(4 - RegExp.$1.length));
+    }
+    for (let k in o) {
+        if (new RegExp("(" + k + ")").test(fmt)) {
+            fmt = fmt.replace(RegExp.$1, (RegExp.$1.length === 1) ? (o[k]) : (("00" + o[k]).substr(("" + o[k]).length)));
+        }
+    }
+    return fmt;
+}
 
 export default {
     install(Vue, options) {
 
         Vue.mixin({
+            filters: {
+                formatTime(self, fmt = 'yyyy-MM-dd hh:mm:ss') {
+                    return new Date(self).format(fmt)
+                }
+            },
             methods: {
+                // 重写的文本框内容
+                successMsg() {
+                    this.$message({
+                        type: 'success',
+                        message: '操作成功',
+                        duration: 2000
+                    })
+                },
+                cancelMsg() {
+                    this.$message({
+                        type: 'info',
+                        message: '操作取消',
+                        duration: 2000
+                    })
+                },
+                failMsg() {
+                    this.$message({
+                        type: 'error',
+                        message: '操作失败',
+                        duration: 2000
+                    })
+                },
+                reMsgBox(title, message, confirmCallback) {
+                    this.$msgbox({
+                        title,
+                        message,
+                        showCancelButton: true,
+                        confirmButtonText: '确定',
+                        cancelButtonText: '取消',
+                        showClose: false,
+                        beforeClose: async (action, instance, done) => {
+                            if (action === 'confirm') {
+                                // 确认执行
+                                instance.confirmButtonLoading = true;
+                                instance.confirmButtonText = 'loading...';
+                                const result = await confirmCallback()
+                                instance.confirmButtonLoading = false;
+                                if (result) {
+                                    // 操作成功
+                                    this.successMsg()
+                                } else {
+                                    this.failMsg()
+                                }
+                                done()
+                            } else {
+                                //取消执行
+                                this.cancelMsg()
+                                done();
+                            }
+                        }
+                    }).catch(() => {
+                    })
+                },
+
+
                 // 判断当前是否已有登录
                 _refresh() {
                     this._getSession()

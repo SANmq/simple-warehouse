@@ -12,8 +12,9 @@ export default new Vuex.Store({
         routeDict: {
             admin: '商品总览',
             manage: '货品管理',
-            inbound: '商品入库',
-            outbound: '商品出库',
+            add: '添加商品',
+            cost: '成本管理',
+            sale: '销售管理',
             log: '操作日志',
             config: '货品参数控制',
             analysis: '分析',
@@ -21,8 +22,6 @@ export default new Vuex.Store({
             store: '仓库分析',
             classify: '分类控制'
         }
-
-
     },
     mutations: {
         setIsLogin(state, payload) {

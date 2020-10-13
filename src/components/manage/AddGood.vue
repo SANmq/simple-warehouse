@@ -23,7 +23,7 @@
                         </el-option>
                     </el-select>
                 </el-form-item>
-                <el-form-item label="商品描述">
+                <el-form-item label="商品备注">
                     <el-input type="textarea"
                               v-model="form.remark"
                               maxlength="200"

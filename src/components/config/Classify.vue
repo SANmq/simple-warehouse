@@ -4,7 +4,7 @@
             分类列表及参数配置
             <el-button type="primary" icon="el-icon-refresh" circle @click="handleGet(true)"></el-button>
         </h2>
-        <el-table :data="classifyList" max-height="350">
+        <el-table :data="classifyList" max-height="350" border>
             <el-table-column label="分类编号" align="center" width="100px">
                 <template slot-scope="scope">
                     {{scope.row.id}}
@@ -39,6 +39,7 @@
         <div style="text-align: center;margin-top: 10px">
             <el-button @click="handleAdd" type="primary">新增分类</el-button>
         </div>
+
     </div>
 </template>
 
@@ -57,7 +58,7 @@
         },
         data() {
             return {
-                classifyItem: {name: '', defaultParams: []}
+                classifyItem: {},
             }
         },
         computed: mapState('config', ['classifyList']),
@@ -65,59 +66,33 @@
             this.handleGet()
         },
         methods: {
+
             handleAdd() {
-                const _c = this.$createElement;
-                this.$msgbox({
-                    title: '新增分类',
-                    message: _c(Edit, {
-                        props: {
-                            form: this.classifyItem
-                        }
-                    }),
-                    showCancelButton: true,
-                    confirmButtonText: '确定',
-                    cancelButtonText: '取消',
-                    beforeClose: (action, instance, done) => {
-                        if (action === 'confirm') {
-                            instance.confirmButtonLoading = true;
-                            instance.confirmButtonText = '提交中请等待...';
-                            this.$http.put('/api/classify', this.classifyItem).then(
-                                (resp) => {
-                                    if (resp.status === 200) {
-                                        // 表示提交成功,有点曲线救国了
-                                        const temp = [].slice.call(this.classifyList, 0)
-                                        temp.push(resp.data)
-                                        this._setLocal('classifyList', temp, 'config')
-                                        this.classifyItem = {name: '', defaultParams: []}
-                                        done()
-                                        instance.confirmButtonLoading = false;
-                                        this.$message({
-                                            type: 'success',
-                                            message: '添加成功',
-                                            duration: 1000,
-                                        });
-                                    }
-                                }
-                            ).catch((err) => {
-                                done()
-                                instance.confirmButtonLoading = false;
-                                this.$message({
-                                    type: 'error',
-                                    message: '添加失败',
-                                    duration: 1000,
-                                });
-                            })
-                        } else {
-                            done();
-                            this.$message({
-                                type: 'info',
-                                message: '已取消',
-                                duration: 1000,
-                            });
-                        }
+                const title = '新增分类'
+                this.classifyItem = {name: '', defaultParams: []}
+                const message = this.$createElement(Edit, {
+                    props: {
+                        form: this.classifyItem
                     }
-                }).then().catch();
+                })
+                const confirmCallback = async () => {
+                    try {
+                        const resp = await this.$http.put('/api/classify', this.classifyItem)
+                        this.classifyItem = {}
+                        if (resp.status === 200) {
+                            this.handleGet(true)
+                            return true
+                        } else {
+                            return false
+                        }
+                    } catch (e) {
+                        this.classifyItem = {}
+                        return false
+                    }
+                }
+                this.reMsgBox(title, message, confirmCallback)
             },
+
             // 获取内容
             handleGet(refresh = false) {
                 let temp = null
@@ -129,132 +104,56 @@
                 }
                 this.$http.get('/api/classify').then((resp) => {
                     if (resp.status === 401) {
-                        console.log(resp.data)
                     } else if (resp.status === 200) {
-                        console.log(resp.data)
                         this._setLocal('classifyList', resp.data, 'config')
                     }
                 }, (err) => {
-                    console.log('我能得到错误信息')
                     console.log(err)
                 })
             },
             // 删除内容
             handleDelete(index, row) {
-                this.$msgbox({
-                        title: '重点提示',
-                        message: '请尽量不要随意删除分类,如果可以请尽量使用修改的方式,' +
-                            '删除后将不可复原,但不会对已有分类的商品产生影响',
-                        showCancelButton: true,
-                        confirmButtonText: '确定',
-                        cancelButtonText: '取消',
-                        beforeClose: (action, instance, done) => {
-                            if (action === 'confirm') {
-                                instance.confirmButtonLoading = true;
-                                instance.confirmButtonText = '提交中...';
-                                this.$http.delete('/api/classify', {params: {id: row.id}}).then(
-                                    (resp) => {
-                                        if (resp.status === 200) {
-                                            // 删除操作成功
-                                            let temp = [].slice.call(this.classifyList)
-                                            temp.splice(index, 1)
-                                            console.log(temp)
-                                            this._setLocal('classifyList', temp, 'config')
-                                            done();
-                                            instance.confirmButtonLoading = false;
-                                        } else {
-                                            done()
-                                            instance.confirmButtonLoading = false;
-                                            this.$message({
-                                                type: 'error',
-                                                message: '添加失败',
-                                                duration: 1000,
-                                            });
-                                        }
-                                    }
-                                ).catch(
-                                    () => {
-                                        done()
-                                        instance.confirmButtonLoading = false;
-                                        this.$message({
-                                            type: 'error',
-                                            message: '添加失败',
-                                            duration: 1000,
-                                        });
-                                    }
-                                )
-                            } else {
-                                done()
-                                this.$message({
-                                    type: 'info',
-                                    message: '已取消',
-                                    duration: 1000,
-                                });
-                            }
+                const title = '重点提示'
+                const message = '请尽量不要删除已有分类,分类编号将无法恢复,删除分类对已有商品的分类结果不会产生影响,修改分类名称也不会产生影响,仅对创建新商品有影响'
+                const confirmCallback = async () => {
+                    try {
+                        const resp = await this.$http.delete('/api/classify', {params: {id: row.id}});
+                        if (resp.status === 200) {
+                            this.handleGet(true)
+                            return true
                         }
+                        return false
+                    } catch (e) {
+                        return false
                     }
-                )
-
-
+                }
+                this.reMsgBox(title, message, confirmCallback)
             },
-
-
-            // 更新内容
+            // 编辑修改操作
             editDetail(index, row) {
                 // 创建一个编辑框进行操作
-                // 不保存副本,当用户放弃修改时复原
-                const _c = this.$createElement;
-                this.$msgbox({
-                    title: '编辑分类',
-                    message: _c(Edit, {
-                        props: {
-                            form: row
-                        }
-                    }),
-                    showCancelButton: true,
-                    confirmButtonText: '确定',
-                    cancelButtonText: '取消',
-                    beforeClose: (action, instance, done) => {
-                        if (action === 'confirm') {
-                            instance.confirmButtonLoading = true;
-                            instance.confirmButtonText = '提交中...';
-                            this.$http.post('/api/classify', row).then(
-                                (resp) => {
-                                    if (resp.status === 200) {
-                                        // 修改成功
-                                        this.$message({
-                                            type: 'success',
-                                            message: '修改成功',
-                                            duration: 1000,
-                                        });
-                                        this._setLocal('classifyList', this.classifyList, 'config')
-                                    } else {
-                                        this._getLocal('classifyList', 'config')
-                                    }
-                                }
-                            ).catch(
-                                (err) => {
-                                    this.$message({
-                                        type: 'error',
-                                        message: '修改失败',
-                                        duration: 1000,
-                                    });
-                                    this._getLocal('classifyList', 'config')
-                                }
-                            )
-                            done()
-                            instance.confirmButtonLoading = false;
-                        } else {
-                            done();
-                            this.$message({
-                                type: 'info',
-                                message: '已取消',
-                                duration: 1000,
-                            });
-                            this._getLocal('classifyList', 'config')
-                        }
+                const title = '编辑分类id:' + row.id
+                // 被共同使用
+                this.classifyItem = JSON.parse(JSON.stringify(row))
+
+                const message = this.$createElement(Edit, {
+                    props: {
+                        form: this.classifyItem,
                     }
-                }).then().catch();
+                })
+                const confirmCallback = async () => {
+                    try {
+                        const resp = await this.$http.post('/api/classify', this.classifyItem)
+                        // 强制刷新一次
+                        this.handleGet(true)
+                        this.classifyItem = {}
+                        return true
+                    } catch (e) {
+                        this.classifyItem = {}
+                        return false
+                    }
+                }
+                this.reMsgBox(title, message, confirmCallback)
             }
         }
 

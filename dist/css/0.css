@@ -31,6 +31,10 @@
   line-height: 48px;
   text-align: center;
 }
+.container .main > div:last-of-type {
+  overflow-y: auto;
+  height: calc(100vh - 48px);
+}
 .open .side {
   width: 180px;
   transition: width 0.3s linear;

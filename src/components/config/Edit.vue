@@ -1,6 +1,6 @@
 <template>
     <el-form :model="form" inline label-width="80px" style="max-height: 400px;overflow-y: auto">
-        <h3>提示:确认前请仔细核对表单信息</h3>
+        <h3 style="font-weight: 600">请认真核对表单信息后再进行确认提交！！！</h3>
         <el-form-item label="分类名称">
             <el-input v-model="form.name"></el-input>
         </el-form-item>
@@ -28,7 +28,7 @@
                         defaultParams: []
                     }
                 }
-            }
+            },
         },
         methods: {
             delParamItem(self, index) {
@@ -36,6 +36,10 @@
             },
             addParamItem() {
                 this.form.defaultParams.push({name: ''})
+            },
+            update() {
+                console.log('能修改么')
+                // this.$emit('update:form',this.classify)
             }
         }
     }

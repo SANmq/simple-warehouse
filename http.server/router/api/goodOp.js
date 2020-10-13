@@ -1,4 +1,4 @@
-const {addGoodItem} = require('../../server/GoodList')
+const {addGoodItem} = require('../../server/Good')
 const express = require("express");
 const router = express.Router();
 const {asyncHandle} = require('../util')

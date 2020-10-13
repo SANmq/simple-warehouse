@@ -1,9 +1,42 @@
-.set-in .el-steps {
-  width: 400px;
-  margin: auto;
+.add-good .el-form {
+  margin: 10px auto auto;
+  width: 500px;
+  height: 400px;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
 }
-.set-in .el-form {
-  width: 600px;
-  margin: 20px auto;
+.add-good .el-form .el-form-item:not([class*=picture-upload]) {
+  width: 100%;
+  display: flex;
+}
+.add-good .el-form .el-form-item:not([class*=picture-upload]) .el-form-item__content {
+  flex-grow: 1;
+  display: flex;
+}
+.add-good .el-form .el-form-item:not([class*=picture-upload]) .el-form-item__content > div:first-of-type {
+  flex-grow: 1;
+}
+.add-good .el-form .picture-upload {
+  height: 100%;
+}
+.add-good .el-form .picture-upload .el-form-item__label {
+  width: 100%;
+  text-align: left;
+}
+.add-good .el-form .picture-upload .el-upload-list__item.is-ready {
+  width: 100px;
+  height: 100px;
+}
+.add-good .el-form .picture-upload .el-upload.el-upload--picture-card {
+  width: 100px;
+  height: 100px;
+  line-height: 106px;
+}
+.add-good .el-form .picture-upload .el-upload-list__item {
+  width: 100px;
+  height: 100px;
 }
 

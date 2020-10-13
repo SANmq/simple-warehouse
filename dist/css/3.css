@@ -1,6 +1,13 @@
-.take-out {
+.cost-manage .edit-input {
+  outline: none;
+  border: none;
+  padding: 5px 0;
   text-align: center;
-  overflow-y: auto;
-  height: calc(100vh - 48px);
+}
+.cost-manage .edit-input[type='button'] {
+  cursor: pointer;
+}
+.cost-manage .edit-input:focus {
+  box-shadow: inset 0 0 1px 1px #409EFF;
 }
 
