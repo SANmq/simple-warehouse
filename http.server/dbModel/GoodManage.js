@@ -11,23 +11,52 @@ module.exports = sequelize.define(
             comment: '商品唯一编号,外键GoodList',
         },
         cost: {
-            type: DataTypes.INTEGER,
+            type: DataTypes.FLOAT,
             defaultValue: 0,
-            comment: '该商品的购入花费'
+            comment: '该商品的购入花费',
+            validate: {
+                min: 0
+            }
         },
         repairCost: {
-            type: DataTypes.INTEGER,
+            type: DataTypes.FLOAT,
             defaultValue: 0,
-            comment: '商品的维修过程花费'
+            field: 'repair_cost',
+            comment: '商品的维修过程花费',
+            validate: {
+                min: 0
+            }
         },
         transCost: {
-            type: DataTypes.INTEGER,
+            type: DataTypes.FLOAT,
             defaultValue: 0,
-            comment: '商品售出时的运费花费'
+            field: 'trans_cost',
+            comment: '商品售出时的运费花费',
+            validate: {
+                min: 0
+            }
+        },
+        price: {
+            type: DataTypes.FLOAT,
+            defaultValue: 0,
+            comment: '商品出售时的标价',
+            validate: {
+                min: 0
+            }
+        },
+        discount: {
+            type: DataTypes.FLOAT,
+            defaultValue: 1,
+            comment: '商品给出的折扣,1为不打折,默认不打折',
+            validate: {
+                min: 0,
+                max: 1
+            }
         },
         isOnSale: {
             type: DataTypes.BOOLEAN,
             defaultValue: false,
+            field: 'is_on_sale',
             comment: '商品是否上架出售'
         },
         detail: {
@@ -41,6 +70,7 @@ module.exports = sequelize.define(
         isSale: {
             type: DataTypes.BOOLEAN,
             defaultValue: false,
+            field: 'is_sale',
             comment: '商品是否售出'
         }
     },

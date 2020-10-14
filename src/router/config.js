@@ -12,6 +12,7 @@ export default [
     {
         path: '/manage',
         component: () => import('../view/Admin'),
+        redirect: '/manage/add',
         children: [
             {
                 path: 'add',
@@ -34,6 +35,7 @@ export default [
     {
         path: '/analysis',
         component: () => import('../view/Admin'),
+        redirect: '/analysis/money',
         children: [
             {
                 path: 'money',
@@ -48,6 +50,7 @@ export default [
     {
         path: '/config',
         component: () => import('../view/Admin'),
+        redirect: '/config/classify',
         children: [
             {
                 path: 'classify',

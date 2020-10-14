@@ -120,6 +120,7 @@
         },
         computed: {
             ...mapState('config', ['classifyList']),
+            ...mapState(['localhost'])
         },
 
         watch: {
@@ -260,7 +261,7 @@
                             })
                             for (let item of resp.data) {
                                 this.form.imageUrlList.push(item.url)
-                                this.fileList.push({name: item.name, url: 'http://localhost:8888/upload/' + item.url})
+                                this.fileList.push({name: item.name, url: this.localhost + '/upload/' + item.url})
                             }
                         } else {
                             this.$message({

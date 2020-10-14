@@ -16,7 +16,6 @@ function asyncHandle(handler) {
             const data = await handler(req, res, next)
             // 如果接收到的data的值为next,则传递到下一个中间件
             if (data) {
-                console.log(typeof data, data)
                 res.send(data)
                 return null
             } else {

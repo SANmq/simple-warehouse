@@ -2,6 +2,7 @@ const {merge} = require('webpack-merge')
 const baseConf = require('./webpack.base.config')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const {CleanWebpackPlugin} = require('clean-webpack-plugin')
+const path = require('path')
 
 const prodConf = {
     mode: 'production',
@@ -14,7 +15,12 @@ const prodConf = {
         ]
     },
     plugins: [
-        new CleanWebpackPlugin(),
+        new CleanWebpackPlugin({
+            cleanOnceBeforeBuildPatterns: [
+                '**/*',
+                '!upload/**'
+            ]
+        }),
         new MiniCssExtractPlugin({
             filename: 'css/[name].css',
             chunkFilename: 'css/[id].css'

@@ -1,42 +1,52 @@
-.add-good .el-form {
-  margin: 10px auto auto;
-  width: 500px;
-  height: 400px;
-  overflow-y: auto;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-around;
-  align-items: center;
-}
-.add-good .el-form .el-form-item:not([class*=picture-upload]) {
+input[data-v-cbabd454] {
   width: 100%;
-  display: flex;
+  outline: none;
+  border: none;
+  text-align: center;
+  box-sizing: border-box;
+  transition: all 0.3s linear;
+  color: inherit;
+  font-family: inherit;
+  font-size: inherit;
 }
-.add-good .el-form .el-form-item:not([class*=picture-upload]) .el-form-item__content {
-  flex-grow: 1;
-  display: flex;
+input[data-v-cbabd454]:focus {
+  transition: all 0.3s linear;
+  box-shadow: inset 0 0 1px 1px #409EFF;
 }
-.add-good .el-form .el-form-item:not([class*=picture-upload]) .el-form-item__content > div:first-of-type {
-  flex-grow: 1;
+input[disabled][data-v-cbabd454] {
+  cursor: pointer;
+  background-color: transparent;
 }
-.add-good .el-form .picture-upload {
+textarea[data-v-cbabd454] {
+  width: 100%;
   height: 100%;
+  resize: none;
+  outline: none;
+  border: none;
+  color: inherit;
+  font-size: inherit;
+  font-family: inherit;
 }
-.add-good .el-form .picture-upload .el-form-item__label {
-  width: 100%;
-  text-align: left;
+textarea[data-v-cbabd454]:focus {
+  transition: all 0.3s linear;
+  box-shadow: inset 0 0 1px 1px #409EFF;
 }
-.add-good .el-form .picture-upload .el-upload-list__item.is-ready {
-  width: 100px;
-  height: 100px;
+textarea[disabled][data-v-cbabd454] {
+  box-shadow: none;
+  cursor: pointer;
+  background-color: transparent;
 }
-.add-good .el-form .picture-upload .el-upload.el-upload--picture-card {
-  width: 100px;
-  height: 100px;
-  line-height: 106px;
+
+.cost-manage .edit-input {
+  outline: none;
+  border: none;
+  padding: 5px 0;
+  text-align: center;
 }
-.add-good .el-form .picture-upload .el-upload-list__item {
-  width: 100px;
-  height: 100px;
+.cost-manage .edit-input[type='button'] {
+  cursor: pointer;
+}
+.cost-manage .edit-input:focus {
+  box-shadow: inset 0 0 1px 1px #409EFF;
 }
 

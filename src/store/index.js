@@ -21,7 +21,9 @@ export default new Vuex.Store({
             money: '收益分析',
             store: '仓库分析',
             classify: '分类控制'
-        }
+        },
+        // localhost: 'http://localhost:8081'
+        localhost: ''
     },
     mutations: {
         setIsLogin(state, payload) {

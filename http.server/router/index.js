@@ -8,7 +8,7 @@ app = express()
 // 给所有请求配置返回头
 app.all('*', function (req, res, next) {
     // console.log(req.hostname)
-    res.header("Access-Control-Allow-Origin", "http://localhost:8080");
+    res.header("Access-Control-Allow-Origin", "http://localhost:8081");
     res.header("Access-Control-Allow-Credentials", "true");
     res.header("Access-Control-Allow-Headers", "Content-Type,X-Requested-With,Authorization,XFILENAME,XFILECATEGORY,XFILESIZE");
     res.header("Access-Control-Allow-Methods", "PUT,POST,GET,DELETE,OPTIONS");
@@ -37,9 +37,9 @@ app.use('/api', verify)
 app.use('/api/upload', require('./api/upload'))
 app.use('/api/classify', require('./api/classifyList'))
 app.use('/api/good', require('./api/goodOp'))
-app.use('/api/cost', require('./api/costManage'))
+app.use('/api/manage', require('./api/goodManage'))
 
-app.listen(8888, async () => {
+app.listen(8081, async () => {
     // 初始化创建一个管理员,账号admin,密码000000,权限1
     // 该账号无法被删除,至少服务器端不提供删除接口
     const admin = await Admin.findByPk('admin')
@@ -48,5 +48,5 @@ app.listen(8888, async () => {
     } else {
         await Admin.create({name: 'admin', password: '000000', power: 1})
     }
-    console.log('监听服务器已开启\nhttp://localhost:8888')
+    console.log('监听服务器已开启\nhttp://localhost:8081')
 })

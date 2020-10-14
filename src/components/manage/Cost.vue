@@ -14,8 +14,8 @@
             <el-table-column align="center" width="100" label="商品简图">
                 <template slot-scope="scope">
                     <el-image style="width: 40px; height: 40px;vertical-align: middle;"
-                              :src="'http://localhost:8888/upload/'+scope.row.imageUrlList[0]"
-                              :preview-src-list="scope.row.imageUrlList.map(v=>'http://localhost:8888/upload/'+v)"
+                              :src="scope.row.imageUrlList.length ? localhost+'/upload/'+scope.row.imageUrlList[0] : ''"
+                              :preview-src-list="scope.row.imageUrlList.map(v=>localhost+'/upload/'+v)"
                               fit="cover">
                     </el-image>
                 </template>
@@ -25,14 +25,9 @@
                     商品成本<i class="el-icon-edit"></i>
                 </template>
                 <template slot-scope="scope">
-                    <input style="width: 80%"
-                           type="button"
-                           class="edit-input"
-                           v-model.number=scope.row.cost
-                           @input="test($event,'cost',scope.row)"
-                           @click="editOpen"
-                           @change="sendReq(scope.row.id,{cost:scope.row.cost})"
-                           @blur="editClose">
+                    <EasyEdit :value="scope.row.cost"
+                              @change="sendReq($event,'cost',scope.row)">
+                    </EasyEdit>
                 </template>
             </el-table-column>
             <el-table-column align="center" width="110">
@@ -40,14 +35,9 @@
                     维修成本<i class="el-icon-edit"></i>
                 </template>
                 <template slot-scope="scope">
-                    <input style="width: 80%"
-                           type="button"
-                           class="edit-input"
-                           v-model.number=scope.row.repairCost
-                           @input="test($event,'repairCost',scope.row)"
-                           @click="editOpen"
-                           @change="sendReq(scope.row.id,{repairCost:scope.row.repairCost})"
-                           @blur="editClose">
+                    <EasyEdit :value="scope.row.repairCost"
+                              @change="sendReq($event,'repairCost',scope.row)">
+                    </EasyEdit>
                 </template>
             </el-table-column>
             <el-table-column align="center" width="110">
@@ -55,14 +45,9 @@
                     运费成本<i class="el-icon-edit"></i>
                 </template>
                 <template slot-scope="scope">
-                    <input style="width: 80%"
-                           type="button"
-                           class="edit-input"
-                           v-model.number=scope.row.transCost
-                           @input="test($event,'transCost',scope.row)"
-                           @click="editOpen"
-                           @change="sendReq(scope.row.id,{transCost:scope.row.transCost})"
-                           @blur="editClose">
+                    <EasyEdit :value="scope.row.transCost"
+                              @change="sendReq($event,'transCost',scope.row)">
+                    </EasyEdit>
                 </template>
             </el-table-column>
             <el-table-column align="center" width="" label="备注信息" prop="remark"></el-table-column>
@@ -85,9 +70,12 @@
 </template>
 
 <script>
+    import EasyEdit from "./EasyEdit";
+    import {mapState} from 'vuex'
+
     export default {
         name: "setIn",
-        components: {},
+        components: {EasyEdit},
         watch: {
             currentPage: {
                 immediate: true,
@@ -96,20 +84,20 @@
                 }
             }
         },
+        computed: mapState(['localhost']),
         data() {
             return {
                 currentPage: 1,
-                total: 58,
+                total: 0,
                 limit: 8,
                 tableData: [],
                 oneDate: [],
                 searchId: '',
-                editCost: true
             }
         },
         methods: {
             getData() {
-                this.$http.get('/api/cost', {params: {limit: this.limit, currentPage: this.currentPage}}).then(
+                this.$http.get('/api/manage/cost', {params: {limit: this.limit, currentPage: this.currentPage}}).then(
                     (resp) => {
                         if (resp.status === 200) {
                             this.total = resp.data.total
@@ -118,39 +106,28 @@
                     }
                 )
             },
-
-            editOpen(e) {
-                e.target.type = 'text'
-            },
-            editClose(e) {
-                e.target.type = 'button'
-            },
-            sendReq(id, data) {
-                this.$http.post('/api/cost', {id, obj: data}).then(
-                    (resp) => {
-                        if (resp.status === 200) {
-                            this.successMsg()
-                        } else {
-                            this.failMsg()
-                        }
-                    }
-                    , () => {
-                        this.failMsg()
-                    })
-            },
-            // 用来处理数值验证问题
-            test(e, k, d) {
-                if (typeof d[k] === 'string') {
-                    d[k] = 0
-                } else {
-                    if (/(^[1-9]\d*?|^0)\.\d\d/.test(e.target.value)) {
-                        d[k] = Number(e.target.value.match(/(^[1-9]\d*?|^0)\.\d\d/)[0])
-                    }
-                    if (/(^[1-9]\d*?|^0)\.$/.test(e.target.value)) {
-                    } else {
-                        e.target.value = '' + d[k]
-                    }
+            sendReq(value, k, row, isNum = true) {
+                if (isNum) {
+                    value = Number(value)
                 }
+                this.$confirm(`确定要将${k}的值${row[k]}修改为新值${value}吗`, '提示').then(
+                    (a) => {
+                        this.$http.post('/api/manage', {id: row.id, obj: {[k]: value}}).then(
+                            (resp) => {
+                                if (resp.status === 200) {
+                                    row[k] = value
+                                    this.successMsg()
+                                } else {
+                                    this.failMsg()
+                                }
+                            }
+                            , () => {
+                                this.failMsg()
+                            })
+                    },
+                    (err) => {
+                        this.cancelMsg()
+                    })
             },
             searchById(id) {
                 // 根据id检索内容

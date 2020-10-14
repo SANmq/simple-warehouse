@@ -132,7 +132,7 @@ export default {
         })
 
         axios.defaults.withCredentials = true
-        axios.defaults.baseURL = 'http://localhost:8888/'
+        // axios.defaults.baseURL = 'http://localhost:8081/'
 
         axios.defaults.validateStatus = (status) => {
             if (status === 401) {

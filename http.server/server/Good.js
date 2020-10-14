@@ -5,7 +5,6 @@ const {handleMultiTableSearch} = require('./util')
 
 async function addGoodItem(nickname, classify, parameters, imageUrlList, remark, number) {
     const x = await Good.create({nickname, classify, parameters, imageUrlList, remark, number});
-    console.log(x)
     await GoodM.create({id: x.id})
     return x.toJSON()
 }
@@ -72,8 +71,14 @@ async function getGoodCost(limit, currentPage) {
     }
 }
 
+async function getGoodSale(limit, currentPage) {
+    const attrs = ['price', 'discount', 'detail', 'isOnSale', 'isSale']
+    const mainAttrs = ['id', 'number', 'nickname', 'imageUrlList']
+    const where = {}
+    const x = await getGoodWithAttrs(limit, currentPage, attrs, mainAttrs, where)
+    return {
+        total: x.count, rows: handleMultiTableSearch(x.rows, 'GoodManage')
+    }
+}
 
-module.exports = {addGoodItem, updateGoodItem, deleteGoodItem, updateGoodManage, getGoodCost}
-// getGoodCost(4, 1).then((result) => {
-//     console.log(result)
-// })
+module.exports = {addGoodItem, updateGoodItem, deleteGoodItem, updateGoodManage, getGoodCost, getGoodSale}
