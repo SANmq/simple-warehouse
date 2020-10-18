@@ -4,34 +4,16 @@ const {DataTypes} = require("sequelize");
 module.exports = sequelize.define(
     "OpLog",
     {
-        opType: {
-            type: DataTypes.STRING,
-            allowNull: false,
-            comment: '操作类型,可选,默认填写,',
-        },
         goodId: {
             type: DataTypes.INTEGER,
             allowNull: false,
             field: 'id',
             comment: '操作的商品编号'
         },
-        oldData: {
-            type: DataTypes.JSON,
+        opType: {
+            type: DataTypes.STRING,
             allowNull: false,
-            field: 'old_data',
-            comment: '被修改的原始数据',
-        },
-        newData: {
-            type: DataTypes.JSON,
-            allowNull: false,
-            field: 'new_data',
-            comment: '被修改后的新数据',
-        },
-        isRollback: {
-            type: DataTypes.BOOLEAN,
-            allowNull: false,
-            field: 'is_rollback',
-            comment: '是否支持回滚',
+            comment: '操作类型,可选,默认填写,只记录状态改变,不记录数值参数改变',
         },
     },
     {
@@ -39,6 +21,6 @@ module.exports = sequelize.define(
         createdAt: true,
         updatedAt: false,
         paranoid: false,
-        deletedAt: true
+        deletedAt: false
     }
 );

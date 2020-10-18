@@ -1,5 +1,5 @@
 <template>
-    <div @click="disabled ? openEdit($event.target) : null">
+    <div class="easy-edit" @click="disabled ? openEdit($event.target) : null">
         <textarea :value="value"
                   :disabled="disabled"
                   v-if="textarea"
@@ -54,7 +54,8 @@
             // 处理表单验证
             validate(value) {
                 while (value && !this.re.test(value)) {
-                    value = value.replace(/.$/, '')
+                    value = value.substr(0, value.lenth - 1)
+                    // value = value.replace(/.$/, '')
                 }
                 return value
             },
@@ -70,52 +71,3 @@
         }
     }
 </script>
-
-<style scoped lang="less">
-    input {
-        width: 100%;
-        outline: none;
-        border: none;
-        text-align: center;
-        box-sizing: border-box;
-        transition: all .3s linear;
-        color: inherit;
-        font-family: inherit;
-        font-size: inherit;
-
-
-        &:focus {
-            transition: all .3s linear;
-            box-shadow: inset 0 0 1px 1px #409EFF;
-        }
-
-        &[disabled] {
-
-            cursor: pointer;
-            background-color: transparent;
-        }
-    }
-
-    textarea {
-        width: 100%;
-        height: 100%;
-        resize: none;
-        outline: none;
-        border: none;
-        color: inherit;
-        font-size: inherit;
-        font-family: inherit;
-
-        &:focus {
-            transition: all .3s linear;
-            box-shadow: inset 0 0 1px 1px #409EFF;
-        }
-
-        &[disabled] {
-
-            box-shadow: none;
-            cursor: pointer;
-            background-color: transparent;
-        }
-    }
-</style>

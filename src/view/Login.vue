@@ -51,7 +51,7 @@
                                 duration: 1000,
                             })
                             this._setSession(this.form.name)
-                            this.$router.push('/admin')
+                            this.$router.push('/msale')
                         }
                     }, (err) => {
                         this.$message({

@@ -5,20 +5,19 @@
 </template>
 
 <script>
-    import Test from "./view/Test";
-
     export default {
         name: "App",
-        components: {
-            Test
-        },
         created() {
             this._refresh()
         }
     };
 </script>
 
-<style>
-
-
+<style lang="less">
+    .id-search {
+        input {
+            padding: 0;
+            text-align: center;
+        }
+    }
 </style>

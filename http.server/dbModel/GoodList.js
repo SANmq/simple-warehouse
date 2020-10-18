@@ -56,7 +56,7 @@ module.exports = sequelize.define(
     {
         tableName: 'good_list',
         createdAt: true,
-        updatedAt: true,
-        deletedAt: true,
+        updatedAt: false,
+        deletedAt: false,
     }
 );

@@ -59,7 +59,7 @@ router.post('/', (req, res, next) => {
                 console.log(req.files)
                 console.log('--------------这里是一次请求---------------------')
                 const data = req.files.map((v, i, self) => {
-                    return {name: v.originalname, url: v.filename}
+                    return {name: v.originalname, url: '/upload/' + v.filename}
                 })
                 res.send(data)
                 // 一切都好

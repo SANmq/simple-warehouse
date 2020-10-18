@@ -6,30 +6,57 @@ export default [
         component: Login,
     },
     {
-        path: '/test',
-        component: () => import('../view/Test')
-    },
-    {
-        path: '/manage',
+        path: '/msale',
         component: () => import('../view/Admin'),
-        redirect: '/manage/add',
+        redirect: '/msale/onsale',
         children: [
             {
-                path: 'add',
-                component: () => import('&/manage/AddGood')
+                path: 'onsale',
+                component: () => import('&/sale-manage/OnSale')
             },
             {
-                path: 'sale',
-                component: () => import('&/manage/Sale')
+                path: 'outsale',
+                component: () => import('&/sale-manage/OutSale')
             },
             {
-                path: 'cost',
-                component: () => import('&/manage/Cost')
+                path: 'forsale',
+                component: () => import('&/sale-manage/ForSale')
+            },
+            {
+                path: 'reback',
+                component: () => import('&/sale-manage/Reback')
+            },
+            {
+                path: 'saleover',
+                component: () => import('&/sale-manage/SaleOver')
             },
             {
                 path: 'log',
-                component: () => import('&/manage/OpLog')
+                component: () => import('&/sale-manage/StateChangeLog')
             }
+        ]
+    },
+    {
+        path: '/mstore',
+        component: () => import('../view/Admin'),
+        redirect: '/mstore/all',
+        children: [
+            {
+                path: 'all',
+                component: () => import('&/store-manage/AllGood')
+            },
+            {
+                path: 'add',
+                component: () => import('&/store-manage/AddGood')
+            },
+            {
+                path: 'cost',
+                component: () => import('&/store-manage/Cost')
+            },
+            {
+                path: 'upshelves',
+                component: () => import('&/store-manage/UpShelves')
+            },
         ]
     },
     {
@@ -55,16 +82,6 @@ export default [
             {
                 path: 'classify',
                 component: () => import('&/config/Classify')
-            },
-        ]
-    },
-    {
-        path: '/admin',
-        component: () => import('../view/Admin'),
-        children: [
-            {
-                path: '',
-                component: () => import('&/menu/All')
             },
         ]
     },

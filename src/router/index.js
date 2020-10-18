@@ -15,10 +15,8 @@ router.beforeEach((to, from, next) => {
         next()
     } else {
         if (isLogin) {
-            console.log('这里执行了么')
             next()
         } else {
-            console.log('我没执行么')
             next('/')
         }
     }

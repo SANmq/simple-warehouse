@@ -1,5 +1,5 @@
 // 成本管理
-const {updateGoodManage, getGoodCost, getGoodSale} = require('../../server/Good')
+const {updateGoodManage, getGoodCost, getGoodOfState} = require('../../server/Good')
 const express = require("express");
 const router = express.Router();
 const {asyncHandle} = require('../util')
@@ -21,7 +21,7 @@ router.get('/sale', asyncHandle(async (req, res, next) => {
     if (req.query.id) {
         // 有id根据id查询
     } else {
-        return getGoodSale(req.query.limit, req.query.currentPage)
+        return getGoodOfState(req.query.limit, req.query.currentPage, 0)
     }
 }))
 

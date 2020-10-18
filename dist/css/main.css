@@ -1,3 +1,8 @@
+.id-search input {
+  padding: 0;
+  text-align: center;
+}
+
 @charset "UTF-8";
 .el-pagination--small .arrow.disabled,
 .el-table .hidden-columns,
@@ -13045,8 +13050,44 @@
 @font-face {
   font-family: 'iconfont';
   /* project id 2116339 */
-  src: url('//at.alicdn.com/t/font_2116339_hze5yl2vqy.eot');
-  src: url('//at.alicdn.com/t/font_2116339_hze5yl2vqy.eot?#iefix') format('embedded-opentype'), url('//at.alicdn.com/t/font_2116339_hze5yl2vqy.woff2') format('woff2'), url('//at.alicdn.com/t/font_2116339_hze5yl2vqy.woff') format('woff'), url('//at.alicdn.com/t/font_2116339_hze5yl2vqy.ttf') format('truetype'), url('//at.alicdn.com/t/font_2116339_hze5yl2vqy.svg#iconfont') format('svg');
+  src: url('//at.alicdn.com/t/font_2116339_av6dno4t7z4.eot');
+  src: url('//at.alicdn.com/t/font_2116339_av6dno4t7z4.eot?#iefix') format('embedded-opentype'), url('//at.alicdn.com/t/font_2116339_av6dno4t7z4.woff2') format('woff2'), url('//at.alicdn.com/t/font_2116339_av6dno4t7z4.woff') format('woff'), url('//at.alicdn.com/t/font_2116339_av6dno4t7z4.ttf') format('truetype'), url('//at.alicdn.com/t/font_2116339_av6dno4t7z4.svg#iconfont') format('svg');
+}
+.el-icon-onsale::before {
+  font-family: iconfont, sans-serif;
+  content: '\e6b9';
+}
+.el-icon-saleover::before {
+  font-family: iconfont, sans-serif;
+  content: '\e65d';
+}
+.el-icon-send::before {
+  font-family: iconfont, sans-serif;
+  content: '\e603';
+}
+.el-icon-forSale::before {
+  font-family: iconfont, sans-serif;
+  content: '\e7e7';
+}
+.el-icon-look::before {
+  font-family: iconfont, sans-serif;
+  content: '\e620';
+}
+.el-icon-store-all::before {
+  font-family: iconfont, sans-serif;
+  content: '\e629';
+}
+.el-icon-sale::before {
+  font-family: iconfont, sans-serif;
+  content: '\e630';
+}
+.el-icon-outsale::before {
+  font-family: iconfont, sans-serif;
+  content: '\e600';
+}
+.el-icon-reback::before {
+  font-family: iconfont, sans-serif;
+  content: '\e655';
 }
 .el-icon-cost::before {
   font-family: iconfont, sans-serif;
@@ -13089,5 +13130,44 @@
 }
 .login .el-form-item {
   margin-right: 0;
+}
+
+.easy-edit input {
+  width: 100%;
+  outline: none;
+  border: none;
+  text-align: center;
+  box-sizing: border-box;
+  transition: all 0.3s linear;
+  color: inherit;
+  font-family: inherit;
+  font-size: inherit;
+}
+.easy-edit input:focus {
+  transition: all 0.3s linear;
+  box-shadow: inset 0 0 1px 1px #409EFF;
+}
+.easy-edit input[disabled] {
+  cursor: pointer;
+  background-color: transparent;
+}
+.easy-edit textarea {
+  width: 100%;
+  height: 100%;
+  resize: none;
+  outline: none;
+  border: none;
+  color: inherit;
+  font-size: inherit;
+  font-family: inherit;
+}
+.easy-edit textarea:focus {
+  transition: all 0.3s linear;
+  box-shadow: inset 0 0 1px 1px #409EFF;
+}
+.easy-edit textarea[disabled] {
+  box-shadow: none;
+  cursor: pointer;
+  background-color: transparent;
 }
 

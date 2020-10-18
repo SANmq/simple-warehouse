@@ -25,12 +25,35 @@ export default {
     install(Vue, options) {
 
         Vue.mixin({
+            data() {
+                return {
+                    searchId: '',
+                    oneData: []
+                }
+            },
             filters: {
                 formatTime(self, fmt = 'yyyy-MM-dd hh:mm:ss') {
                     return new Date(self).format(fmt)
                 }
             },
             methods: {
+                searchById(url, id, state) {
+                    if (id) {
+                        this.$http.get(url, {params: {id, state}}).then(
+                            resp => {
+                                if (resp.status === 200) {
+                                    this.oneData = resp.data
+                                }
+                            }, err => {
+                                this.oneData = []
+                            }
+                        )
+                    } else {
+                        this.oneData = []
+                    }
+                },
+
+
                 // 重写的文本框内容
                 successMsg() {
                     this.$message({
@@ -83,6 +106,35 @@ export default {
                         }
                     }).catch(() => {
                     })
+                },
+                // 定向提交单个的数据修改
+                sendReq(url, k, value, row, message) {
+                    const type = typeof value
+                    if (!message) {
+                        if (type === 'number') {
+                            message = `确定要将${k}的值${row[k]}修改为新${value}么`
+                        } else if (type === 'string') {
+                            message = `确定将原值修改为“${value}”么？`
+                        } else if (type === 'boolean') {
+                            message = `确定要${value ? '打开' : '停用'}么`
+                        }
+                    }
+                    this.$confirm(message, '提示').then(
+                        _ => {
+                            this.$http.post(url, {id: row.id, obj: {[k]: value}}).then(
+                                (resp) => {
+                                    if (resp.status === 200) {
+                                        row[k] = value
+                                        this.successMsg()
+                                    } else {
+                                        this.failMsg()
+                                    }
+                                }
+                                , () => {
+                                    this.failMsg()
+                                })
+                        }, _ => this.cancelMsg()
+                    )
                 },
 
 

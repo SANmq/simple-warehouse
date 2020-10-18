@@ -84,7 +84,6 @@
                         {{isLoading ? '上传等待中。。。。':result ? '上传成功' : '上传失败'}}
                     </div>
                 </div>
-
             </template>
         </el-form>
         <div style="text-align: center">
@@ -107,14 +106,14 @@
                 form: {
                     nickname: '',
                     classify: '',
-                    number: 0,
+                    number: 1,
                     remark: '',
                     parameters: [],
                     imageUrlList: [],
                 },
                 paramsTip: '请先添加分类',
                 isLoading: true,
-                result: false,
+                result: null,
                 fileList: []
             }
         },
@@ -138,7 +137,6 @@
                     this.form.parameters = defaultParams.map((value) => {
                         return {name: value.name, "value": ''}
                     })
-                    console.log(this.form.parameters)
                 }
             },
         },
@@ -154,7 +152,6 @@
                             // 请求成功
                             this.isLoading = false
                             this.result = true
-                            console.log(resp.data)
                         } else {
                             this.result = false
                         }
@@ -241,7 +238,6 @@
                 this.fileList = []
                 this.fileList = temp
                 // fileList.splice(i, 0, file)
-                // console.log(file, fileList);
             },
             exceed() {
                 this.$alert('文件数量超出8个,请重新选择')
@@ -249,7 +245,6 @@
 
             submitUpload() {
                 // 提交文件
-                console.log('测试上传方法')
                 this.imageForm = new FormData()
                 this.$refs.upload.submit();
                 this.$http.post('/api/upload', this.imageForm).then(
@@ -261,7 +256,7 @@
                             })
                             for (let item of resp.data) {
                                 this.form.imageUrlList.push(item.url)
-                                this.fileList.push({name: item.name, url: this.localhost + '/upload/' + item.url})
+                                this.fileList.push({name: item.name, url: item.url})
                             }
                         } else {
                             this.$message({
@@ -270,7 +265,6 @@
                             })
                         }
                     }, (err) => {
-                        console.log(err)
                         this.$message({
                             type: 'error',
                             message: '上传失败'

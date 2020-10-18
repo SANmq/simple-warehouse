@@ -28,13 +28,19 @@ module.exports = sequelize.define(
             validate: {
                 notNull: true,
             }
-        }
+        },
+        disabled: {
+            type: DataTypes.BOOLEAN,
+            allowNull: false,
+            comment: '该分类是否被弃用,可恢复,不可被删除',
+            defaultValue: true
+        },
     },
     {
         tableName: 'classify_list',
         paranoid: false,
-        createdAt: true,
-        deletedAt: true,
+        createdAt: false,
+        deletedAt: false,
         updatedAt: false
     }
 );

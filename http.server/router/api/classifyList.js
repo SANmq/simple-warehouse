@@ -1,4 +1,4 @@
-const {addClassifyItem, delClassifyItem, updateClassifyItem, getClassifyList, getClassifyItemAll} = require('../../server/Classify')
+const {addClassifyItem, updateClassifyItem, getClassifyItemAll} = require('../../server/Classify')
 const express = require("express");
 const router = express.Router();
 const {asyncHandle} = require('../util')
@@ -9,13 +9,9 @@ router.put('/', asyncHandle(async (req, res, next) => {
 }))
 
 router.post('/', asyncHandle(async (req, res, next) => {
-    return updateClassifyItem(req.body.id, req.body.name, req.body.defaultParams)
+    return updateClassifyItem(req.body.id, req.body.obj)
 }))
 
-router.delete('/', asyncHandle(async (req, res, next) => {
-    console.log('我的类型是' + typeof req.query.id)
-    return delClassifyItem(Number(req.query.id))
-}))
 
 router.get('/', asyncHandle(async (req, res, next) => {
     return getClassifyItemAll()
